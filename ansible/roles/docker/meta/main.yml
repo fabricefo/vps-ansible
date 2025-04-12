@@ -1,0 +1,10 @@
+---
+galaxy_info:
+  author: "Ton Nom"
+  description: "Installe Docker CE sur les VPS"
+  license: MIT
+  platforms:
+    - name: Ubuntu
+      versions:
+        - focal
+        - jammy

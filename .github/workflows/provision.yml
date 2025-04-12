@@ -1,0 +1,33 @@
+name: Provision VPS via Ansible
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+
+jobs:
+  provision:
+    name: Run Ansible Provisioning
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Set up SSH key
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          ssh-keyscan -H vps1.example.com >> ~/.ssh/known_hosts
+          ssh-keyscan -H vps2.example.com >> ~/.ssh/known_hosts
+
+      - name: Install Ansible
+        run: |
+          sudo apt update
+          sudo apt install -y ansible
+
+      - name: Run Ansible Playbook
+        run: |
+          ansible-playbook -i inventory.ini site.yml

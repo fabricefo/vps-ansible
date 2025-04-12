@@ -1,0 +1,12 @@
+- name: Common provisioning (both VPS)
+  hosts: vps
+  become: true
+  roles:
+    - ansible.roles.vps
+    - docker
+
+- name: Install Caddy only on VPS1
+  hosts: vps1
+  become: true
+  roles:
+    - caddy

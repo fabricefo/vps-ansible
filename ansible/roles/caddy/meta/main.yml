@@ -1,0 +1,10 @@
+---
+galaxy_info:
+  author: "Ton Nom"
+  description: "Installe et configure Caddy en tant que service"
+  license: MIT
+  platforms:
+    - name: Ubuntu
+      versions:
+        - focal
+        - jammy
