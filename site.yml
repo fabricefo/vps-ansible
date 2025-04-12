@@ -2,7 +2,11 @@
   hosts: vps
   become: true
   roles:
-    - ansible.roles.vps
+    - user
+    - packages
+    - ssh
+    - iptables
+    - fail2ban
     - docker
 
 - name: Install Caddy only on VPS1
