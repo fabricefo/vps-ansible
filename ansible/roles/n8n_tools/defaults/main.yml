@@ -1,0 +1,5 @@
+n8n_user: admin
+n8n_password: admin
+supabase_user: supabase_user
+supabase_password: supabase_password
+supabase_db: supabase_db

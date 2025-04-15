@@ -14,3 +14,9 @@
   become: true
   roles:
     - caddy
+
+- name: Install n8n and additional tools on VPS2
+  hosts: vps2
+  become: true
+  roles:
+    - n8n_tools

@@ -1,0 +1,30 @@
+- name: Ensure Docker is installed
+  include_role:
+    name: docker
+
+- name: Install Docker Compose
+  apt:
+    name: docker-compose-plugin
+    state: present
+  when: ansible_os_family == "Debian"
+
+- name: Create directory for n8n and tools
+  file:
+    path: /opt/n8n_tools
+    state: directory
+    owner: root
+    group: root
+    mode: '0755'
+
+- name: Copy docker-compose.yml
+  copy:
+    src: templates/docker-compose.yml
+    dest: /opt/n8n_tools/docker-compose.yml
+    owner: root
+    group: root
+    mode: '0644'
+
+- name: Start services with Docker Compose
+  command: docker compose up -d
+  args:
+    chdir: /opt/n8n_tools
