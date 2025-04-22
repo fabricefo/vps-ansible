@@ -26,3 +26,19 @@
     groups: vpsuser
     append: yes
 
+- name: Copy .bashrc template to user's home directory
+  template:
+    src: bashrc.j2
+    dest: "/home/{{ username }}/.bashrc"
+    owner: "{{ username }}"
+    group: vpsuser
+    mode: '0644'
+
+- name: Copy .vimrc template to user's home directory
+  template:
+    src: vimrc.j2
+    dest: "/home/{{ username }}/.vimrc"
+    owner: "{{ username }}"
+    group: vpsuser
+    mode: '0644'
+
