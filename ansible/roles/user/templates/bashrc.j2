@@ -1,0 +1,18 @@
+# ~/.bashrc: executed by bash(1) for non-login shells.
+
+# Enable color support for ls and add handy aliases
+if [ -x /usr/bin/dircolors ]; then
+    eval "$(dircolors -b)"
+    alias ls='ls --color=auto'
+    alias ll='ls -alF'
+    alias la='ls -A'
+    alias l='ls -CF'
+fi
+
+# Add custom prompt
+PS1='[\u@\h \W]\$ '
+
+# Add user-specific aliases and functions below
+alias ..="cd .."
+alias ...="cd ../.."
+alias grep="grep --color=auto"
