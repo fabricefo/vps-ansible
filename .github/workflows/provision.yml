@@ -40,6 +40,7 @@ jobs:
         env:
           VPS1_HOST: ${{ secrets.VPS1_HOST }}
           VPS2_HOST: ${{ secrets.VPS2_HOST }}
+          VPS3_HOST: ${{ secrets.VPS3_HOST }}
 
       - name: Run Ansible Playbook
         run: |
