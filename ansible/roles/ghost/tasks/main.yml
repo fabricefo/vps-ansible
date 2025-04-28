@@ -1,0 +1,21 @@
+---
+- name: Create Ghost data directory
+  file:
+    path: /var/lib/ghost
+    state: directory
+    owner: 1000
+    group: 1000
+    mode: '0755'
+
+- name: Deploy Ghost container
+  docker_container:
+    name: ghost
+    image: ghost:latest
+    state: started
+    restart_policy: always
+    ports:
+      - "2368:2368"
+    volumes:
+      - /var/lib/ghost:/var/lib/ghost
+    env:
+      url: http://{{ ansible_host }}

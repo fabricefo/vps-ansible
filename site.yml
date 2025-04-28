@@ -14,9 +14,18 @@
   become: true
   roles:
     - caddy
+    - portainer
+    - ghost
 
 - name: Install n8n and additional tools on VPS2
   hosts: vps2
   become: true
   roles:
     - n8n_tools
+
+
+- name: Install K3s on VPS3
+  hosts: vps3
+  become: true
+  roles:
+    - k3s
