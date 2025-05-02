@@ -1,6 +1,7 @@
 [vps]
 vps1 ansible_host={{ lookup('env', 'VPS1_HOST') }}
 vps2 ansible_host={{ lookup('env', 'VPS2_HOST') }}
+vps3 ansible_host={{ lookup('env', 'VPS3_HOST') }}
 
 [vps:vars]
 ansible_user=root

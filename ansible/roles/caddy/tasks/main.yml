@@ -29,3 +29,25 @@
     name: caddy
     enabled: yes
     state: started
+
+- name: Create Caddy configuration directory
+  file:
+    path: /etc/caddy
+    state: directory
+    owner: root
+    group: root
+    mode: '0755'
+
+- name: Deploy Caddyfile
+  template:
+    src: Caddyfile.j2
+    dest: /etc/caddy/Caddyfile
+    owner: root
+    group: root
+    mode: '0644'
+
+- name: Restart Caddy service
+  service:
+    name: caddy
+    state: restarted
+    enabled: true
