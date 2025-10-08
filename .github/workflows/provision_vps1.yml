@@ -1,4 +1,4 @@
-name: Provision VPS via Ansible
+name: Provision VPS1 only via Ansible
 
 on:
   workflow_dispatch:
