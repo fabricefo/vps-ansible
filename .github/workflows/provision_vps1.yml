@@ -1,0 +1,44 @@
+name: Provision VPS via Ansible
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+
+jobs:
+  provision:
+    name: Run Ansible Provisioning
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up SSH key
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+        shell: bash
+
+      - name: Add known hosts
+        run: |
+          ssh-keyscan -H ${{ secrets.VPS1_HOST }} >> ~/.ssh/known_hosts
+        shell: bash
+
+      - name: Install dependencies (Ansible + Jinja2)
+        run: |
+          sudo apt update
+          sudo apt install -y python3-pip
+          pip3 install ansible jinja2
+
+      - name: Generate dynamic inventory
+        run: |
+          python3 generate_inventory.py
+        env:
+          VPS1_HOST: ${{ secrets.VPS1_HOST }}
+
+      - name: Run Ansible Playbook
+        run: |
+          ansible-playbook -i inventory.ini vps1.yml
